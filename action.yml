@@ -1,0 +1,24 @@
+name: Agent file check
+description: Checks the CLAUDE.md, AGENTS.md and other agent instruction files a pull request changes, and comments the result on the pull request.
+inputs:
+  fmp-key:
+    description: Your FixMyPrompt CI key (starts with fmp_ci_). Store it as a repository secret.
+    required: true
+  fail-below:
+    description: Fail the check when the score is lower than this number. Leave empty to only comment.
+    required: false
+    default: ""
+  api-url:
+    description: FixMyPrompt address.
+    required: false
+    default: https://fixmyprompt.net
+runs:
+  using: composite
+  steps:
+    - run: node "${{ github.action_path }}/check.mjs"
+      shell: bash
+      env:
+        FMP_KEY: ${{ inputs.fmp-key }}
+        FMP_FAIL_BELOW: ${{ inputs.fail-below }}
+        FMP_API_URL: ${{ inputs.api-url }}
+        GITHUB_TOKEN: ${{ github.token }}
