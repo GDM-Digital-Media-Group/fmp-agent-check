@@ -1,5 +1,5 @@
 name: Agent file check
-description: Checks the CLAUDE.md, AGENTS.md and other agent instruction files a pull request changes, and comments the result on the pull request.
+description: Checks the CLAUDE.md, AGENTS.md and other agent files a pull request changes, and comments a score with the problems found.
 inputs:
   fmp-key:
     description: Your FixMyPrompt CI key (starts with fmp_ci_). Store it as a repository secret.
