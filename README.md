@@ -43,6 +43,17 @@ jobs:
 | `fmp-key` | yes | | Your CI key. Keep it in a secret. |
 | `fail-below` | no | | Fail the check when the score is under this number. It applies only to a score. |
 | `api-url` | no | `https://fixmyprompt.net` | FixMyPrompt address. |
+| `send-file-list` | no | `true` | Send the names of the files in your repository so the check can name paths that do not exist. Set it to `false` to turn that off. |
+
+## Commands and paths
+
+The check also names commands in your agent files that run an npm, pnpm, yarn or bun script your package.json does not have, and paths in inline code that are not in the repository. For that, the action sends your root package.json and the package.json of each workspace (from `workspaces` in package.json or pnpm-workspace.yaml).
+
+The action sends the names of the files in your repository, not their contents, so the check can tell which paths exist. Nothing is stored. The names come from `git ls-files`.
+
+These findings do not change the score yet, so `fail-below` never fails a pull request because of them.
+
+To turn that off, add `send-file-list: false` under `with`. Then only the package.json files are sent, with a yes or no for whether the repository has other package.json files (no names), and the paths check is skipped. A repository with more than 20,000 files, or more than 1 MB of file names, skips the paths check. None of this costs anything extra.
 
 ## What it costs
 
