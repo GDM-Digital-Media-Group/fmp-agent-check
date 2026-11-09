@@ -22,3 +22,7 @@ runs:
         FMP_FAIL_BELOW: ${{ inputs.fail-below }}
         FMP_API_URL: ${{ inputs.api-url }}
         GITHUB_TOKEN: ${{ github.token }}
+
+branding:
+  icon: check-circle
+  color: blue
